@@ -1,14 +1,195 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Inicio</title>
+  <meta charset="UTF-8" />
+  <title>Formulación – Universidad Peruana Unión</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    /* Reset y base */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f0f4f8; /* fondo claro */
+      color: #333; /* texto oscuro */
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 25px;
+      max-width: 480px;
+      background: #ffffff; /* fondo blanco */
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    header img {
+      width: 100px;
+      margin-bottom: 15px;
+    }
+
+    header h1 {
+      font-weight: 600;
+      font-size: 2.2rem;
+      margin-bottom: 5px;
+      color: #1976d2; /* azul */
+      letter-spacing: 1px;
+    }
+
+    header p {
+      font-weight: 400;
+      font-size: 1rem;
+      color: #555; /* gris oscuro */
+      margin: 3px 0;
+    }
+
+    nav {
+      margin: 20px 0;
+      background: #ffffff; /* fondo blanco */
+      border-radius: 10px;
+      padding: 10px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    nav a {
+      color: #1976d2; /* azul */
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #0d47a1; /* azul más oscuro */
+      text-decoration: underline;
+    }
+
+    .info-academica {
+      background: #ffffff; /* fondo blanco */
+      border-radius: 10px;
+      padding: 15px 20px;
+      max-width: 480px;
+      text-align: center;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    .info-academica p {
+      font-size: 0.85rem;
+      color: #777; /* gris medio */
+      margin: 5px 0;
+    }
+
+    main {
+      display: flex;
+      gap: 18px;
+      justify-content: center;
+      flex-wrap: wrap;
+      max-width: 520px;
+      width: 100%;
+    }
+
+    .card {
+      background: #1976d2; /* azul */
+      padding: 18px 22px;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+      flex: 1 1 150px;
+      max-width: 160px;
+      text-align: center;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      cursor: pointer;
+    }
+
+    .card:hover {
+      background: #0d47a1; /* azul más oscuro */
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.2);
+    }
+
+    .card a {
+      color: #ffffff; /* texto blanco */
+      font-weight: 600;
+      font-size: 1.05rem;
+      text-decoration: none;
+      display: block;
+      user-select: none;
+    }
+
+    .card a:focus,
+    .card a:hover {
+      text-decoration: underline;
+      color: #bbdefb; /* azul claro */
+    }
+
+    footer {
+      margin-top: auto;
+      padding: 20px 10px;
+      font-size: 0.9rem;
+      color: #555; /* gris oscuro */
+      user-select: none;
+      text-align: center;
+      max-width: 480px;
+      border-top: 1px solid rgba(0, 0, 0, 0.1);
+      margin-top: 30px;
+    }
+
+    @media (max-width: 480px) {
+      main {
+        flex-direction: column;
+        gap: 15px;
+      }
+      .card {
+        max-width: 100%;
+      }
+    }
+  </style>
 </head>
 <body>
-  <h1>Bienvenido al sitio</h1>
-  <ul>
-    <li><a href="carpeta1/archivo1.html">Carpeta 1 - Archivo 1</a></li>
-    <li><a href="carpeta2/archivo2.html">Carpeta 1 - Archivo 2</a></li>
-    <li><a href="carpeta3/archivo3.html">Carpeta 1 - Archivo 3</a></li>
+  <header>
+    <img src="https://upeu.edu.pe/wp-content/uploads/2022/03/04.png" alt="Logo UPeU" />
+    <h1>Universidad Peruana Unión</h1>
+    <p>Facultad de Ingeniería y Arquitectura</p>
+    <p>Escuela Profesional de Sistemas – Sede Juliaca</p>
+  </header>
+
+  <nav>
+    <a href="#info">Información</a>
+    <a href="#tareas">Tareas</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
+
+  <section class="info-academica" id="info">
+    <p><strong>Curso:</strong> Formulación &nbsp;&nbsp;|&nbsp;&nbsp; <strong>Ciclo:</strong> 2025-I</p>
+    <p><strong>Docente:</strong> Dayvis Victor Farfan Gavancho</p>
+    <p><strong>Estudiante:</strong> Reginaldo Dan Mayhuire Buendia</p>
+  </section>
+
+  <main id="tareas">
+    <div class="card">
+      <a href="Tarea1/tarea1.html" tabindex="0">📘 Tarea 1</a>
+    </div>
+    <div class="card">
+      <a href="Tarea2/tarea2.html" tabindex="0">📗 Tarea 2</a>
+    </div>
+    <div class="card">
+      <a href="Tarea3/tarea3.html" tabindex="0">📙 Tarea 3</a>
+    </div>
+  </main>
+
+  <footer id="contacto">
+    &copy; 2025 Reginaldo Dan Mayhuire Buendia &middot; Universidad Peruana Unión
+  </footer>
 </body>
 </html>
