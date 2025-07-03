@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análisis de Factores Ambientales Empresariales - Netflix Case Study</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .factor-card {
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+        
+        .factor-card:hover {
+            border-color: #3b82f6;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+        }
+        
+        .icon-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        .line-clamp-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen">
+    <!-- Header -->
+    <div class="bg-white shadow-sm border-b">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center space-x-3">
+                    <div class="icon-container h-8 w-8 text-blue-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 21h16.5M4.5 3h15l-.75 18H5.25L4.5 3z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold text-gray-900">Análisis de Factores Ambientales</h1>
+                        <p class="text-sm text-gray-600">Caso de Estudio: Netflix Inc.</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button onclick="exportAnalysis()" class="flex items-center space-x-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
+                        </svg>
+                        <span>Exportar Análisis</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Statistics Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="bg-white rounded-xl shadow-sm p-6 border card-hover">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-600">Total Factores</p>
+                        <p class="text-3xl font-bold text-gray-900" id="total-factors">8</p>
+                    </div>
+                    <div class="bg-blue-100 p-3 rounded-full">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-blue-600">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-xl shadow-sm p-6 border card-hover">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-600">Factores Internos</p>
+                        <p class="text-3xl font-bold text-green-600" id="internal-factors">3</p>
+                    </div>
+                    <div class="bg-green-100 p-3 rounded-full">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-green-600">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-xl shadow-sm p-6 border card-hover">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-600">Factores Externos</p>
+                        <p class="text-3xl font-bold text-orange-600" id="external-factors">5</p>
+                    </div>
+                    <div class="bg-orange-100 p-3 rounded-full">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-orange-600">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3s-4.5 4.03-4.5 9 2.015 9 4.5 9z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Factors List -->
+            <div class="lg:col-span-2">
+                <div class="bg-white rounded-xl shadow-sm border">
+                    <div class="p-6 border-b">
+                        <div class="flex items-center justify-between">
+                            <h2 class="text-lg font-semibold text-gray-900">Factores Ambientales Identificados</h2>
+                            <div class="flex space-x-2">
+                                <button onclick="filterFactors('all')" id="btn-all" class="px-4 py-2 rounded-lg text-sm font-medium transition-colors bg-blue-600 text-white">
+                                    Todos
+                                </button>
+                                <button onclick="filterFactors('internal')" id="btn-internal" class="px-4 py-2 rounded-lg text-sm font-medium transition-colors bg-gray-100 text-gray-700 hover:bg-gray-200">
+                                    Internos
+                                </button>
+                                <button onclick="filterFactors('external')" id="btn-external" class="px-4 py-2 rounded-lg text-sm font-medium transition-colors bg-gray-100 text-gray-700 hover:bg-gray-200">
+                                    Externos
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-6">
+                        <div class="space-y-4" id="factors-container">
+                            <!-- Factors will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Detail Panel -->
+            <div class="space-y-6">
+                <div class="bg-white rounded-xl shadow-sm border" id="detail-panel">
+                    <div class="p-6">
+                        <div class="text-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-12 h-12 text-gray-300 mx-auto mb-4">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6a7.5 7.5 0 107.5 7.5h-7.5V6z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 10.5H21A7.5 7.5 0 0013.5 3v7.5z" />
+                            </svg>
+                            <h3 class="font-medium text-gray-900 mb-2">Selecciona un Factor</h3>
+                            <p class="text-sm text-gray-600">
+                                Haz clic en cualquier factor para ver su análisis detallado
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Case Study Info -->
+                <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-6 border border-blue-200">
+                    <h3 class="font-semibold text-blue-900 mb-3">Caso de Estudio: Netflix</h3>
+                    <p class="text-sm text-blue-800 leading-relaxed">
+                        Netflix es un ejemplo paradigmático de cómo una empresa puede adaptarse a los factores ambientales. 
+                        Su transformación de servicio de DVD por correo a plataforma global de streaming demuestra la 
+                        importancia de identificar y responder proactivamente a los cambios del entorno empresarial.
+                    </p>
+                </div>
+
+                <!-- Methodology -->
+                <div class="bg-white rounded-xl shadow-sm border p-6">
+                    <h3 class="font-semibold text-gray-900 mb-3">Metodología Aplicada</h3>
+                    <div class="space-y-2 text-sm text-gray-600">
+                        <p>• Análisis PESTEL para factores externos</p>
+                        <p>• Evaluación de recursos y capacidades internas</p>
+                        <p>• Matriz de impacto vs. probabilidad</p>
+                        <p>• Benchmarking con competidores directos</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Data structure for factors
+        const factors = [
+            {
+                id: '1',
+                name: 'Infraestructura Tecnológica Avanzada',
+                category: 'internal',
+                subcategory: 'Recursos Tecnológicos',
+                description: 'Netflix cuenta con una infraestructura cloud robusta basada en AWS, que permite streaming global sin interrupciones y procesamiento de big data para recomendaciones personalizadas.',
+                impact: 'high',
+                probability: 'high',
+                icon: 'cpu',
+                color: '#3B82F6'
+            },
+            {
+                id: '2',
+                name: 'Algoritmos de Machine Learning',
+                category: 'internal',
+                subcategory: 'Capacidades Organizacionales',
+                description: 'Sistema de recomendación basado en ML que analiza comportamiento de usuarios, mejorando la experiencia y retención de suscriptores.',
+                impact: 'high',
+                probability: 'high',
+                icon: 'target',
+                color: '#10B981'
+            },
+            {
+                id: '3',
+                name: 'Cultura Organizacional Innovadora',
+                category: 'internal',
+                subcategory: 'Recursos Humanos',
+                description: 'Cultura empresarial que fomenta la experimentación, el aprendizaje continuo y la toma de decisiones basada en datos.',
+                impact: 'medium',
+                probability: 'high',
+                icon: 'users',
+                color: '#8B5CF6'
+            },
+            {
+                id: '4',
+                name: 'Regulaciones de Contenido Global',
+                category: 'external',
+                subcategory: 'Político-Legal',
+                description: 'Diferentes regulaciones por país sobre contenido, censura y cuotas de producción local que afectan la expansión global.',
+                impact: 'high',
+                probability: 'high',
+                icon: 'shield',
+                color: '#EF4444'
+            },
+            {
+                id: '5',
+                name: 'Competencia de Streaming',
+                category: 'external',
+                subcategory: 'Económico',
+                description: 'Intensificación de la competencia con Disney+, HBO Max, Amazon Prime Video y plataformas locales.',
+                impact: 'high',
+                probability: 'high',
+                icon: 'trending-up',
+                color: '#F59E0B'
+            },
+            {
+                id: '6',
+                name: 'Cambios en Hábitos de Consumo',
+                category: 'external',
+                subcategory: 'Social',
+                description: 'Evolución hacia contenido móvil, formatos cortos y experiencias interactivas influenciadas por redes sociales.',
+                impact: 'medium',
+                probability: 'high',
+                icon: 'globe',
+                color: '#EC4899'
+            },
+            {
+                id: '7',
+                name: 'Avances en Tecnología 5G',
+                category: 'external',
+                subcategory: 'Tecnológico',
+                description: 'Implementación global de 5G que mejora la calidad de streaming móvil y abre oportunidades para contenido de alta definición.',
+                impact: 'medium',
+                probability: 'high',
+                icon: 'cpu',
+                color: '#06B6D4'
+            },
+            {
+                id: '8',
+                name: 'Presión Inflacionaria Global',
+                category: 'external',
+                subcategory: 'Económico',
+                description: 'Aumento de costos de producción de contenido y presión sobre precios de suscripción debido a la inflación mundial.',
+                impact: 'high',
+                probability: 'medium',
+                icon: 'dollar-sign',
+                color: '#F97316'
+            }
+        ];
+
+        let currentFilter = 'all';
+        let selectedFactor = null;
+
+        // Icon mapping
+        const iconMap = {
+            'cpu': '<path stroke-linecap="round" stroke-linejoin="round" d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-16.5 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21m-9-1.5h10.5a2.25 2.25 0 002.25-2.25V6.75a2.25 2.25 0 00-2.25-2.25H6.75A2.25 2.25 0 004.5 6.75v10.5a2.25 2.25 0 002.25 2.25zm.75-12h9v9h-9v-9z" />',
+            'target': '<path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />',
+            'users': '<path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />',
+            'shield': '<path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />',
+            'trending-up': '<path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941" />',
+            'globe': '<path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3s-4.5 4.03-4.5 9 2.015 9 4.5 9z" />',
+            'dollar-sign': '<path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />'
+        };
+
+        function getIcon(iconName) {
+            return `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5">${iconMap[iconName] || iconMap['cpu']}</svg>`;
+        }
+
+        function getImpactClass(impact) {
+            switch (impact) {
+                case 'high': return 'bg-red-100 text-red-800';
+                case 'medium': return 'bg-yellow-100 text-yellow-800';
+                case 'low': return 'bg-green-100 text-green-800';
+                default: return 'bg-gray-100 text-gray-800';
+            }
+        }
+
+        function getImpactText(impact) {
+            switch (impact) {
+                case 'high': return 'Alto';
+                case 'medium': return 'Medio';
+                case 'low': return 'Bajo';
+                default: return 'N/A';
+            }
+        }
+
+        function renderFactors() {
+            const container = document.getElementById('factors-container');
+            const filteredFactors = factors.filter(factor => 
+                currentFilter === 'all' || factor.category === currentFilter
+            );
+
+            container.innerHTML = filteredFactors.map(factor => `
+                <div class="border rounded-lg p-4 factor-card" onclick="selectFactor('${factor.id}')">
+                    <div class="flex items-start justify-between">
+                        <div class="flex items-start space-x-3">
+                            <div class="p-2 rounded-lg" style="background-color: ${factor.color}20;">
+                                <div style="color: ${factor.color};">
+                                    ${getIcon(factor.icon)}
+                                </div>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="font-semibold text-gray-900">${factor.name}</h3>
+                                <p class="text-sm text-gray-600 mt-1">${factor.subcategory}</p>
+                                <p class="text-sm text-gray-500 mt-2 line-clamp-2">
+                                    ${factor.description}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="px-2 py-1 text-xs font-medium rounded-full ${
+                                factor.category === 'internal' 
+                                    ? 'bg-green-100 text-green-800' 
+                                    : 'bg-orange-100 text-orange-800'
+                            }">
+                                ${factor.category === 'internal' ? 'Interno' : 'Externo'}
+                            </span>
+                            <span class="px-2 py-1 text-xs font-medium rounded-full ${getImpactClass(factor.impact)}">
+                                ${getImpactText(factor.impact)} Impacto
+                            </span>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 text-gray-400">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filterFactors(category) {
+            currentFilter = category;
+            
+            // Update button states
+            document.querySelectorAll('[id^="btn-"]').forEach(btn => {
+                btn.className = 'px-4 py-2 rounded-lg text-sm font-medium transition-colors bg-gray-100 text-gray-700 hover:bg-gray-200';
+            });
+            
+            const activeBtn = document.getElementById(`btn-${category}`);
+            if (activeBtn) {
+                activeBtn.className = 'px-4 py-2 rounded-lg text-sm font-medium transition-colors bg-blue-600 text-white';
+            }
+            
+            renderFactors();
+        }
+
+        function selectFactor(factorId) {
+            selectedFactor = factors.find(f => f.id === factorId);
+            renderDetailPanel();
+        }
+
+        function renderDetailPanel() {
+            const panel = document.getElementById('detail-panel');
+            
+            if (!selectedFactor) {
+                panel.innerHTML = `
+                    <div class="p-6">
+                        <div class="text-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-12 h-12 text-gray-300 mx-auto mb-4">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6a7.5 7.5 0 107.5 7.5h-7.5V6z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 10.5H21A7.5 7.5 0 0013.5 3v7.5z" />
+                            </svg>
+                            <h3 class="font-medium text-gray-900 mb-2">Selecciona un Factor</h3>
+                            <p class="text-sm text-gray-600">
+                                Haz clic en cualquier factor para ver su análisis detallado
+                            </p>
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+
+            panel.innerHTML = `
+                <div class="p-6">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="p-3 rounded-lg" style="background-color: ${selectedFactor.color}20;">
+                            <div style="color: ${selectedFactor.color};">
+                                ${getIcon(selectedFactor.icon)}
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-gray-900">${selectedFactor.name}</h3>
+                            <p class="text-sm text-gray-600">${selectedFactor.subcategory}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-medium text-gray-900 mb-2">Descripción Detallada</h4>
+                            <p class="text-sm text-gray-600 leading-relaxed">
+                                ${selectedFactor.description}
+                            </p>
+                        </div>
+                        
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <h4 class="font-medium text-gray-900 mb-2">Impacto</h4>
+                                <span class="inline-flex px-3 py-1 text-sm font-medium rounded-full ${getImpactClass(selectedFactor.impact)}">
+                                    ${getImpactText(selectedFactor.impact)}
+                                </span>
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-gray-900 mb-2">Probabilidad</h4>
+                                <span class="inline-flex px-3 py-1 text-sm font-medium rounded-full ${getImpactClass(selectedFactor.probability)}">
+                                    ${getImpactText(selectedFactor.probability)}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function exportAnalysis() {
+            alert('Funcionalidad de exportación implementada. En un entorno real, esto generaría un PDF o documento con el análisis completo.');
+        }
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', function() {
+            renderFactors();
+            renderDetailPanel();
+        });
+    </script>
+</body>
+</html>

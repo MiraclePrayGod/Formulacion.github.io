@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PMBOK 10 Áreas de Conocimiento & 49 Procesos - Guía Didáctica</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #1f2937;
+            background: linear-gradient(135deg, #eff6ff 0%, #e0e7ff 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid #e5e7eb;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.5rem 0;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .header-icon {
+            font-size: 2rem;
+            color: #3b82f6;
+        }
+
+        .header-text h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 0.25rem;
+        }
+
+        .header-text p {
+            color: #6b7280;
+            font-size: 0.875rem;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .progress-info {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+
+        .progress-bar {
+            width: 6rem;
+            height: 0.5rem;
+            background: #e5e7eb;
+            border-radius: 9999px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #3b82f6;
+            border-radius: 9999px;
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+
+        /* Main Content */
+        .main {
+            padding: 2rem 0;
+        }
+
+        .view {
+            display: none;
+        }
+
+        .view.active {
+            display: block;
+        }
+
+        /* Introduction Section */
+        .intro-section {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .intro-section h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 1rem;
+        }
+
+        .intro-text {
+            font-size: 1.125rem;
+            color: #6b7280;
+            max-width: 48rem;
+            margin: 0 auto 1.5rem;
+        }
+
+        .info-box {
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            max-width: 64rem;
+            margin: 0 auto;
+        }
+
+        .info-box h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1e40af;
+            margin-bottom: 0.75rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .info-number {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.125rem;
+        }
+
+        .info-number.blue {
+            background: #3b82f6;
+        }
+
+        .info-number.green {
+            background: #10b981;
+        }
+
+        .info-title {
+            font-weight: 600;
+            color: #1e40af;
+        }
+
+        .info-subtitle {
+            color: #1d4ed8;
+            font-size: 0.875rem;
+        }
+
+        /* Knowledge Areas Grid */
+        .areas-section {
+            margin-bottom: 3rem;
+        }
+
+        .areas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .area-card {
+            background: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .area-card:hover {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .area-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .area-icon {
+            width: 3rem;
+            height: 3rem;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .area-card:hover .area-icon {
+            transform: scale(1.1);
+        }
+
+        .completed-icon {
+            color: #10b981;
+            font-size: 1.5rem;
+        }
+
+        .area-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+
+        .area-description {
+            color: #6b7280;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+
+        .area-action {
+            display: flex;
+            align-items: center;
+            color: #3b82f6;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .area-card:hover .area-action {
+            color: #1d4ed8;
+        }
+
+        .area-action i {
+            margin-left: 0.25rem;
+            transition: transform 0.3s ease;
+        }
+
+        .area-card:hover .area-action i {
+            transform: translateX(0.25rem);
+        }
+
+        /* Color Classes */
+        .bg-blue { background: #3b82f6; }
+        .bg-green { background: #10b981; }
+        .bg-purple { background: #8b5cf6; }
+        .bg-yellow { background: #f59e0b; }
+        .bg-red { background: #ef4444; }
+        .bg-indigo { background: #6366f1; }
+        .bg-pink { background: #ec4899; }
+        .bg-orange { background: #f97316; }
+        .bg-teal { background: #14b8a6; }
+        .bg-cyan { background: #06b6d4; }
+
+        /* Process Groups Section */
+        .process-groups-section {
+            margin-bottom: 3rem;
+        }
+
+        .process-groups-card {
+            background: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+        }
+
+        .process-groups-card h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 1.5rem;
+        }
+
+        .process-groups-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .process-group {
+            text-align: center;
+        }
+
+        .process-group-number {
+            width: 4rem;
+            height: 4rem;
+            border-radius: 0.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            margin: 0 auto 0.75rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .process-group-label {
+            font-size: 0.75rem;
+            opacity: 0.9;
+            margin-top: -0.25rem;
+        }
+
+        .process-group h3 {
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 0.25rem;
+        }
+
+        .process-group p {
+            color: #6b7280;
+            font-size: 0.875rem;
+        }
+
+        /* Detail View */
+        .detail-card {
+            background: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .detail-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.5rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .detail-header-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .back-button {
+            background: none;
+            border: none;
+            color: #6b7280;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 0.25rem;
+            transition: color 0.3s ease;
+        }
+
+        .back-button:hover {
+            color: #374151;
+        }
+
+        .detail-icon {
+            width: 3rem;
+            height: 3rem;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .detail-title-section h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 0.25rem;
+        }
+
+        .detail-title-section p {
+            color: #6b7280;
+        }
+
+        .complete-button {
+            background: #10b981;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .complete-button:hover {
+            background: #059669;
+        }
+
+        .complete-button:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+        }
+
+        /* Detail Content */
+        .detail-content {
+            padding: 1.5rem;
+        }
+
+        .explanation-box {
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .explanation-box h2 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #1e40af;
+            margin-bottom: 0.75rem;
+        }
+
+        .explanation-box p {
+            color: #1d4ed8;
+            font-size: 1.125rem;
+            line-height: 1.7;
+        }
+
+        .examples-section {
+            margin-bottom: 2rem;
+        }
+
+        .examples-section h2 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 1rem;
+        }
+
+        .examples-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .example-item {
+            background: #f9fafb;
+            border-radius: 0.5rem;
+            padding: 1rem;
+        }
+
+        .example-number {
+            width: 1.5rem;
+            height: 1.5rem;
+            background: #3b82f6;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.875rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .example-text {
+            color: #374151;
+        }
+
+        .processes-section h2 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 1rem;
+        }
+
+        .processes-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .process-item {
+            background: #f9fafb;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            transition: background 0.3s ease;
+        }
+
+        .process-item:hover {
+            background: #f3f4f6;
+        }
+
+        .process-content {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .process-number {
+            width: 2rem;
+            height: 2rem;
+            background: #3b82f6;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.875rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .process-name {
+            font-weight: 500;
+            color: #1f2937;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .detail-header {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+
+            .detail-header-left {
+                width: 100%;
+            }
+
+            .complete-button {
+                width: 100%;
+            }
+
+            .areas-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .process-groups-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+
+            .examples-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .view.active {
+            animation: fadeIn 0.3s ease;
+        }
+
+        .area-card {
+            animation: fadeIn 0.3s ease;
+        }
+
+        .area-card:nth-child(1) { animation-delay: 0.1s; }
+        .area-card:nth-child(2) { animation-delay: 0.2s; }
+        .area-card:nth-child(3) { animation-delay: 0.3s; }
+        .area-card:nth-child(4) { animation-delay: 0.4s; }
+        .area-card:nth-child(5) { animation-delay: 0.5s; }
+        .area-card:nth-child(6) { animation-delay: 0.6s; }
+        .area-card:nth-child(7) { animation-delay: 0.7s; }
+        .area-card:nth-child(8) { animation-delay: 0.8s; }
+        .area-card:nth-child(9) { animation-delay: 0.9s; }
+        .area-card:nth-child(10) { animation-delay: 1.0s; }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="header-left">
+                    <i class="fas fa-book-open header-icon"></i>
+                    <div class="header-text">
+                        <h1>PMBOK Guía Didáctica</h1>
+                        <p>10 Áreas de Conocimiento • 49 Procesos</p>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <div class="progress-info">
+                        <span>Completado: <span id="completed-count">0</span>/10</span>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progress-fill"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <!-- Home View -->
+            <div id="home-view" class="view active">
+                <!-- Introduction -->
+                <section class="intro-section">
+                    <h2>¿Qué es la Gestión de Proyectos?</h2>
+                    <p class="intro-text">
+                        La gestión de proyectos es como ser el director de una orquesta. Coordinas diferentes músicos (equipos), 
+                        sigues una partitura (plan), y te aseguras de que todo suene armonioso (proyecto exitoso).
+                    </p>
+                    <div class="info-box">
+                        <h3>El PMBOK (Project Management Body of Knowledge) organiza todo esto en:</h3>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <div class="info-number blue">10</div>
+                                <div class="info-content">
+                                    <div class="info-title">Áreas de Conocimiento</div>
+                                    <div class="info-subtitle">Categorías principales de gestión</div>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-number green">49</div>
+                                <div class="info-content">
+                                    <div class="info-title">Procesos</div>
+                                    <div class="info-subtitle">Pasos específicos a seguir</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Knowledge Areas Grid -->
+                <section class="areas-section">
+                    <div class="areas-grid" id="areas-grid">
+                        <!-- Areas will be populated by JavaScript -->
+                    </div>
+                </section>
+
+                <!-- Process Groups Info -->
+                <section class="process-groups-section">
+                    <div class="process-groups-card">
+                        <h2>Los 49 Procesos se Organizan en 5 Grupos:</h2>
+                        <div class="process-groups-grid">
+                            <div class="process-group">
+                                <div class="process-group-number green">2</div>
+                                <div class="process-group-label">procesos</div>
+                                <h3>Inicio</h3>
+                                <p>Comenzar el proyecto</p>
+                            </div>
+                            <div class="process-group">
+                                <div class="process-group-number blue">24</div>
+                                <div class="process-group-label">procesos</div>
+                                <h3>Planificación</h3>
+                                <p>Definir cómo hacer todo</p>
+                            </div>
+                            <div class="process-group">
+                                <div class="process-group-number purple">10</div>
+                                <div class="process-group-label">procesos</div>
+                                <h3>Ejecución</h3>
+                                <p>Hacer el trabajo</p>
+                            </div>
+                            <div class="process-group">
+                                <div class="process-group-number orange">12</div>
+                                <div class="process-group-label">procesos</div>
+                                <h3>Monitoreo</h3>
+                                <p>Vigilar el progreso</p>
+                            </div>
+                            <div class="process-group">
+                                <div class="process-group-number red">1</div>
+                                <div class="process-group-label">procesos</div>
+                                <h3>Cierre</h3>
+                                <p>Finalizar el proyecto</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Detail View -->
+            <div id="detail-view" class="view">
+                <div class="detail-card">
+                    <!-- Area Header -->
+                    <div class="detail-header">
+                        <div class="detail-header-left">
+                            <button id="back-button" class="back-button">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <div class="detail-icon" id="detail-icon">
+                                <!-- Icon will be populated by JavaScript -->
+                            </div>
+                            <div class="detail-title-section">
+                                <h1 id="detail-title"><!-- Title will be populated --></h1>
+                                <p id="detail-description"><!-- Description will be populated --></p>
+                            </div>
+                        </div>
+                        <button id="complete-button" class="complete-button">
+                            Marcar como completado
+                        </button>
+                    </div>
+
+                    <!-- Content -->
+                    <div class="detail-content">
+                        <!-- Simple Explanation -->
+                        <div class="explanation-box">
+                            <h2>🎯 Explicación Simple</h2>
+                            <p id="simple-explanation"><!-- Explanation will be populated --></p>
+                        </div>
+
+                        <!-- Examples -->
+                        <div class="examples-section">
+                            <h2>💡 Ejemplos Prácticos</h2>
+                            <div class="examples-grid" id="examples-grid">
+                                <!-- Examples will be populated by JavaScript -->
+                            </div>
+                        </div>
+
+                        <!-- Processes -->
+                        <div class="processes-section">
+                            <h2 id="processes-title">📋 Procesos</h2>
+                            <div class="processes-list" id="processes-list">
+                                <!-- Processes will be populated by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Knowledge Areas Data
+        const knowledgeAreas = [
+            {
+                id: 'integration',
+                name: 'Gestión de la Integración',
+                icon: 'fas fa-cogs',
+                description: 'Coordina todos los aspectos del proyecto',
+                simpleExplanation: 'Imagina que estás organizando una fiesta. La integración es como ser el coordinador principal que se asegura de que todo funcione junto: la música, la comida, los invitados, etc.',
+                processes: [
+                    'Desarrollar el Acta de Constitución del Proyecto',
+                    'Desarrollar el Plan de Gestión del Proyecto',
+                    'Dirigir y Gestionar el Trabajo del Proyecto',
+                    'Gestionar el Conocimiento del Proyecto',
+                    'Monitorear y Controlar el Trabajo del Proyecto',
+                    'Realizar el Control Integrado de Cambios',
+                    'Cerrar el Proyecto o Fase'
+                ],
+                color: 'bg-blue',
+                examples: ['Crear el documento inicial del proyecto', 'Coordinar entre diferentes equipos', 'Aprobar cambios en el proyecto']
+            },
+            {
+                id: 'scope',
+                name: 'Gestión del Alcance',
+                icon: 'fas fa-bullseye',
+                description: 'Define qué se incluye y qué no en el proyecto',
+                simpleExplanation: 'Es como hacer una lista de compras muy detallada. Defines exactamente qué vas a comprar (qué incluye el proyecto) y qué no vas a comprar (qué no incluye).',
+                processes: [
+                    'Planificar la Gestión del Alcance',
+                    'Recopilar Requisitos',
+                    'Definir el Alcance',
+                    'Crear la EDT (Estructura de Desglose del Trabajo)',
+                    'Validar el Alcance',
+                    'Controlar el Alcance'
+                ],
+                color: 'bg-green',
+                examples: ['Definir características del producto', 'Crear lista de tareas específicas', 'Establecer límites del proyecto']
+            },
+            {
+                id: 'schedule',
+                name: 'Gestión del Cronograma',
+                icon: 'fas fa-clock',
+                description: 'Planifica y controla los tiempos del proyecto',
+                simpleExplanation: 'Como planificar tu día: decides qué hacer primero, cuánto tiempo tomará cada actividad, y cómo organizarlas para terminar todo a tiempo.',
+                processes: [
+                    'Planificar la Gestión del Cronograma',
+                    'Definir las Actividades',
+                    'Secuenciar las Actividades',
+                    'Estimar la Duración de las Actividades',
+                    'Desarrollar el Cronograma',
+                    'Controlar el Cronograma'
+                ],
+                color: 'bg-purple',
+                examples: ['Crear calendario de tareas', 'Establecer fechas límite', 'Identificar tareas críticas']
+            },
+            {
+                id: 'cost',
+                name: 'Gestión de los Costos',
+                icon: 'fas fa-dollar-sign',
+                description: 'Planifica y controla el presupuesto del proyecto',
+                simpleExplanation: 'Como administrar el dinero de tu hogar: calculas cuánto necesitas, planificas los gastos, y te aseguras de no exceder el presupuesto.',
+                processes: [
+                    'Planificar la Gestión de los Costos',
+                    'Estimar los Costos',
+                    'Determinar el Presupuesto',
+                    'Controlar los Costos'
+                ],
+                color: 'bg-yellow',
+                examples: ['Calcular presupuesto total', 'Controlar gastos', 'Analizar costos vs beneficios']
+            },
+            {
+                id: 'quality',
+                name: 'Gestión de la Calidad',
+                icon: 'fas fa-star',
+                description: 'Asegura que el proyecto cumpla con los estándares',
+                simpleExplanation: 'Como revisar tu tarea antes de entregarla: te aseguras de que esté bien hecha, sin errores, y que cumpla con lo que se pidió.',
+                processes: [
+                    'Planificar la Gestión de la Calidad',
+                    'Gestionar la Calidad',
+                    'Controlar la Calidad'
+                ],
+                color: 'bg-red',
+                examples: ['Establecer estándares de calidad', 'Realizar pruebas', 'Revisar entregables']
+            },
+            {
+                id: 'resource',
+                name: 'Gestión de los Recursos',
+                icon: 'fas fa-users',
+                description: 'Gestiona personas, equipos y materiales',
+                simpleExplanation: 'Como organizar un equipo de trabajo: decides quién hace qué, cuántas personas necesitas, y qué herramientas requieren.',
+                processes: [
+                    'Planificar la Gestión de los Recursos',
+                    'Estimar los Recursos de las Actividades',
+                    'Adquirir Recursos',
+                    'Desarrollar el Equipo',
+                    'Dirigir al Equipo',
+                    'Controlar los Recursos'
+                ],
+                color: 'bg-indigo',
+                examples: ['Asignar roles al equipo', 'Conseguir herramientas necesarias', 'Capacitar al personal']
+            },
+            {
+                id: 'communication',
+                name: 'Gestión de las Comunicaciones',
+                icon: 'fas fa-comments',
+                description: 'Planifica y gestiona la información del proyecto',
+                simpleExplanation: 'Como mantener informada a tu familia sobre planes: decides qué información compartir, con quién, cuándo y cómo comunicarla.',
+                processes: [
+                    'Planificar la Gestión de las Comunicaciones',
+                    'Gestionar las Comunicaciones',
+                    'Monitorear las Comunicaciones'
+                ],
+                color: 'bg-pink',
+                examples: ['Crear reportes de avance', 'Organizar reuniones', 'Mantener informados a interesados']
+            },
+            {
+                id: 'risk',
+                name: 'Gestión de los Riesgos',
+                icon: 'fas fa-shield-alt',
+                description: 'Identifica y maneja eventos que pueden afectar el proyecto',
+                simpleExplanation: 'Como llevar paraguas por si llueve: identificas qué podría salir mal, planificas qué hacer si pasa, y tienes planes de respaldo.',
+                processes: [
+                    'Planificar la Gestión de los Riesgos',
+                    'Identificar los Riesgos',
+                    'Realizar el Análisis Cualitativo de Riesgos',
+                    'Realizar el Análisis Cuantitativo de Riesgos',
+                    'Planificar la Respuesta a los Riesgos',
+                    'Implementar la Respuesta a los Riesgos',
+                    'Monitorear los Riesgos'
+                ],
+                color: 'bg-orange',
+                examples: ['Identificar posibles problemas', 'Crear planes de contingencia', 'Monitorear amenazas']
+            },
+            {
+                id: 'procurement',
+                name: 'Gestión de las Adquisiciones',
+                icon: 'fas fa-box',
+                description: 'Gestiona compras y contratos externos',
+                simpleExplanation: 'Como comprar algo importante: investigas opciones, comparas precios, negocias términos, y te aseguras de recibir lo que pagaste.',
+                processes: [
+                    'Planificar la Gestión de las Adquisiciones',
+                    'Efectuar las Adquisiciones',
+                    'Controlar las Adquisiciones'
+                ],
+                color: 'bg-teal',
+                examples: ['Solicitar cotizaciones', 'Negociar contratos', 'Evaluar proveedores']
+            },
+            {
+                id: 'stakeholder',
+                name: 'Gestión de los Interesados',
+                icon: 'fas fa-chart-line',
+                description: 'Identifica y gestiona a todas las personas afectadas por el proyecto',
+                simpleExplanation: 'Como conocer a todos los que se verán afectados por tu decisión: identificas quiénes son, qué esperan, y cómo mantenerlos contentos.',
+                processes: [
+                    'Identificar a los Interesados',
+                    'Planificar el Involucramiento de los Interesados',
+                    'Gestionar el Involucramiento de los Interesados',
+                    'Monitorear el Involucramiento de los Interesados'
+                ],
+                color: 'bg-cyan',
+                examples: ['Identificar clientes y usuarios', 'Planificar reuniones con stakeholders', 'Gestionar expectativas']
+            }
+        ];
+
+        // Application State
+        let completedAreas = new Set();
+        let currentView = 'home';
+        let selectedArea = null;
+
+        // DOM Elements
+        const homeView = document.getElementById('home-view');
+        const detailView = document.getElementById('detail-view');
+        const areasGrid = document.getElementById('areas-grid');
+        const backButton = document.getElementById('back-button');
+        const completeButton = document.getElementById('complete-button');
+        const completedCount = document.getElementById('completed-count');
+        const progressFill = document.getElementById('progress-fill');
+
+        // Initialize Application
+        document.addEventListener('DOMContentLoaded', function() {
+            loadProgress();
+            renderKnowledgeAreas();
+            updateProgress();
+            setupEventListeners();
+        });
+
+        // Render Knowledge Areas Grid
+        function renderKnowledgeAreas() {
+            areasGrid.innerHTML = '';
+            
+            knowledgeAreas.forEach(area => {
+                const areaCard = document.createElement('div');
+                areaCard.className = 'area-card';
+                areaCard.dataset.areaId = area.id;
+                
+                areaCard.innerHTML = `
+                    <div class="area-header">
+                        <div class="area-icon ${area.color}">
+                            <i class="${area.icon}"></i>
+                        </div>
+                        ${completedAreas.has(area.id) ? '<i class="fas fa-check-circle completed-icon"></i>' : ''}
+                    </div>
+                    <h3 class="area-title">${area.name}</h3>
+                    <p class="area-description">${area.description}</p>
+                    <div class="area-action">
+                        <i class="fas fa-play"></i>
+                        Aprender ahora
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                `;
+                
+                areaCard.addEventListener('click', () => showAreaDetail(area.id));
+                areasGrid.appendChild(areaCard);
+            });
+        }
+
+        // Show Area Detail
+        function showAreaDetail(areaId) {
+            selectedArea = knowledgeAreas.find(area => area.id === areaId);
+            if (!selectedArea) return;
+            
+            // Update detail view content
+            document.getElementById('detail-icon').innerHTML = `<i class="${selectedArea.icon}"></i>`;
+            document.getElementById('detail-icon').className = `detail-icon ${selectedArea.color}`;
+            document.getElementById('detail-title').textContent = selectedArea.name;
+            document.getElementById('detail-description').textContent = selectedArea.description;
+            document.getElementById('simple-explanation').textContent = selectedArea.simpleExplanation;
+            document.getElementById('processes-title').textContent = `📋 Procesos (${selectedArea.processes.length})`;
+            
+            // Update complete button state
+            if (completedAreas.has(selectedArea.id)) {
+                completeButton.textContent = 'Completado ✓';
+                completeButton.disabled = true;
+            } else {
+                completeButton.textContent = 'Marcar como completado';
+                completeButton.disabled = false;
+            }
+            
+            // Render examples
+            renderExamples();
+            
+            // Render processes
+            renderProcesses();
+            
+            // Switch views
+            switchView('detail');
+        }
+
+        // Render Examples
+        function renderExamples() {
+            const examplesGrid = document.getElementById('examples-grid');
+            examplesGrid.innerHTML = '';
+            
+            selectedArea.examples.forEach((example, index) => {
+                const exampleItem = document.createElement('div');
+                exampleItem.className = 'example-item';
+                
+                exampleItem.innerHTML = `
+                    <div class="example-number">${index + 1}</div>
+                    <p class="example-text">${example}</p>
+                `;
+                
+                examplesGrid.appendChild(exampleItem);
+            });
+        }
+
+        // Render Processes
+        function renderProcesses() {
+            const processesList = document.getElementById('processes-list');
+            processesList.innerHTML = '';
+            
+            selectedArea.processes.forEach((process, index) => {
+                const processItem = document.createElement('div');
+                processItem.className = 'process-item';
+                
+                processItem.innerHTML = `
+                    <div class="process-content">
+                        <div class="process-number">${index + 1}</div>
+                        <div class="process-name">${process}</div>
+                    </div>
+                `;
+                
+                processesList.appendChild(processItem);
+            });
+        }
+
+        // Switch Views
+        function switchView(view) {
+            homeView.classList.remove('active');
+            detailView.classList.remove('active');
+            
+            if (view === 'home') {
+                homeView.classList.add('active');
+                currentView = 'home';
+            } else if (view === 'detail') {
+                detailView.classList.add('active');
+                currentView = 'detail';
+            }
+            
+            smoothScrollToTop();
+        }
+
+        // Mark Area as Complete
+        function markAreaComplete() {
+            if (selectedArea && !completedAreas.has(selectedArea.id)) {
+                completedAreas.add(selectedArea.id);
+                completeButton.textContent = 'Completado ✓';
+                completeButton.disabled = true;
+                updateProgress();
+                saveProgress();
+                
+                // Show success animation
+                showCompletionAnimation();
+            }
+        }
+
+        // Show Completion Animation
+        function showCompletionAnimation() {
+            const button = completeButton;
+            button.style.transform = 'scale(1.1)';
+            button.style.background = '#10b981';
+            
+            setTimeout(() => {
+                button.style.transform = 'scale(1)';
+            }, 200);
+        }
+
+        // Update Progress
+        function updateProgress() {
+            const completed = completedAreas.size;
+            const total = knowledgeAreas.length;
+            const percentage = (completed / total) * 100;
+            
+            completedCount.textContent = completed;
+            progressFill.style.width = `${percentage}%`;
+            
+            // Re-render areas to show completion status
+            if (currentView === 'home') {
+                renderKnowledgeAreas();
+            }
+        }
+
+        // Setup Event Listeners
+        function setupEventListeners() {
+            backButton.addEventListener('click', () => {
+                switchView('home');
+                selectedArea = null;
+            });
+            
+            completeButton.addEventListener('click', markAreaComplete);
+            
+            // Keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && currentView === 'detail') {
+                    switchView('home');
+                    selectedArea = null;
+                }
+            });
+        }
+
+        // Smooth scrolling for better UX
+        function smoothScrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Save progress to localStorage
+        function saveProgress() {
+            localStorage.setItem('pmbok-completed-areas', JSON.stringify([...completedAreas]));
+        }
+
+        // Load progress from localStorage
+        function loadProgress() {
+            const saved = localStorage.getItem('pmbok-completed-areas');
+            if (saved) {
+                completedAreas = new Set(JSON.parse(saved));
+            }
+        }
+    </script>
+</body>
+</html>

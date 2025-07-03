@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PMBOK 6 vs PMBOK 7 - Comparación Educativa Completa</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #3b82f6 0%, #10b981 100%);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .tab-active {
+            border-bottom: 2px solid #3b82f6;
+            color: #3b82f6;
+        }
+        .tab-inactive {
+            border-bottom: 2px solid transparent;
+            color: #6b7280;
+        }
+        .tab-inactive:hover {
+            color: #374151;
+            border-bottom-color: #d1d5db;
+        }
+        .hidden {
+            display: none;
+        }
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, #3b82f6, #10b981);
+            border-radius: 2px;
+        }
+        .timeline-dot {
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(to right, #3b82f6, #10b981);
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+            position: relative;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-blue-50 via-white to-emerald-50">
+    <!-- Header -->
+    <header class="gradient-bg text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="text-center">
+                <i data-lucide="book-open" class="w-16 h-16 mx-auto mb-4 opacity-90"></i>
+                <h1 class="text-4xl md:text-5xl font-bold mb-4">PMBOK 6 vs PMBOK 7</h1>
+                <p class="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto">
+                    Guía Completa de Comparación y Evolución en la Gestión de Proyectos
+                </p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex space-x-8 overflow-x-auto">
+                <button onclick="showTab('overview')" id="tab-overview" class="flex items-center space-x-2 py-4 px-6 border-b-2 font-medium text-sm transition-colors tab-active">
+                    <i data-lucide="book-open" class="w-5 h-5"></i>
+                    <span>Visión General</span>
+                </button>
+                <button onclick="showTab('pmbok6')" id="tab-pmbok6" class="flex items-center space-x-2 py-4 px-6 border-b-2 font-medium text-sm transition-colors tab-inactive">
+                    <i data-lucide="layers" class="w-5 h-5"></i>
+                    <span>PMBOK 6</span>
+                </button>
+                <button onclick="showTab('pmbok7')" id="tab-pmbok7" class="flex items-center space-x-2 py-4 px-6 border-b-2 font-medium text-sm transition-colors tab-inactive">
+                    <i data-lucide="zap" class="w-5 h-5"></i>
+                    <span>PMBOK 7</span>
+                </button>
+                <button onclick="showTab('comparison')" id="tab-comparison" class="flex items-center space-x-2 py-4 px-6 border-b-2 font-medium text-sm transition-colors tab-inactive">
+                    <i data-lucide="git-branch" class="w-5 h-5"></i>
+                    <span>Comparación</span>
+                </button>
+                <button onclick="showTab('evolution')" id="tab-evolution" class="flex items-center space-x-2 py-4 px-6 border-b-2 font-medium text-sm transition-colors tab-inactive">
+                    <i data-lucide="trending-up" class="w-5 h-5"></i>
+                    <span>Evolución</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <!-- Overview Section -->
+        <div id="content-overview" class="space-y-12">
+            <section class="text-center">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6">¿Qué es el PMBOK?</h2>
+                <div class="bg-white rounded-2xl shadow-xl p-8 max-w-4xl mx-auto">
+                    <p class="text-lg text-gray-600 leading-relaxed mb-6">
+                        El <strong>Project Management Body of Knowledge (PMBOK)</strong> es el estándar mundial 
+                        para la gestión de proyectos desarrollado por el Project Management Institute (PMI). 
+                        Representa la suma de conocimientos, mejores prácticas y metodologías probadas 
+                        en el campo de la gestión de proyectos.
+                    </p>
+                    <div class="grid md:grid-cols-3 gap-6 mt-8">
+                        <div class="text-center p-6 bg-blue-50 rounded-xl">
+                            <i data-lucide="target" class="w-12 h-12 text-blue-600 mx-auto mb-3"></i>
+                            <h3 class="font-semibold text-gray-800 mb-2">Estándar Global</h3>
+                            <p class="text-sm text-gray-600">Reconocido mundialmente como la referencia en gestión de proyectos</p>
+                        </div>
+                        <div class="text-center p-6 bg-emerald-50 rounded-xl">
+                            <i data-lucide="users" class="w-12 h-12 text-emerald-600 mx-auto mb-3"></i>
+                            <h3 class="font-semibold text-gray-800 mb-2">Mejores Prácticas</h3>
+                            <p class="text-sm text-gray-600">Compilación de técnicas y métodos probados por profesionales</p>
+                        </div>
+                        <div class="text-center p-6 bg-purple-50 rounded-xl">
+                            <i data-lucide="lightbulb" class="w-12 h-12 text-purple-600 mx-auto mb-3"></i>
+                            <h3 class="font-semibold text-gray-800 mb-2">Evolución Continua</h3>
+                            <p class="text-sm text-gray-600">Se actualiza constantemente para reflejar nuevas tendencias</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Métricas de Comparación Rápida</h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="bg-white p-6 rounded-xl shadow-lg">
+                        <div class="flex items-center space-x-3 mb-4">
+                            <i data-lucide="file-text" class="w-6 h-6 text-blue-600"></i>
+                            <h3 class="font-semibold text-gray-800">Procesos vs Principios</h3>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="text-center p-4 bg-blue-50 rounded-lg">
+                                <div class="text-2xl font-bold text-blue-600 mb-1">49</div>
+                                <div class="text-sm text-gray-600">PMBOK 6</div>
+                            </div>
+                            <div class="text-center p-4 bg-emerald-50 rounded-lg">
+                                <div class="text-2xl font-bold text-emerald-600 mb-1">12</div>
+                                <div class="text-sm text-gray-600">PMBOK 7</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-lg">
+                        <div class="flex items-center space-x-3 mb-4">
+                            <i data-lucide="layers" class="w-6 h-6 text-blue-600"></i>
+                            <h3 class="font-semibold text-gray-800">Áreas vs Dominios</h3>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="text-center p-4 bg-blue-50 rounded-lg">
+                                <div class="text-2xl font-bold text-blue-600 mb-1">10</div>
+                                <div class="text-sm text-gray-600">PMBOK 6</div>
+                            </div>
+                            <div class="text-center p-4 bg-emerald-50 rounded-lg">
+                                <div class="text-2xl font-bold text-emerald-600 mb-1">8</div>
+                                <div class="text-sm text-gray-600">PMBOK 7</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-lg">
+                        <div class="flex items-center space-x-3 mb-4">
+                            <i data-lucide="refresh-cw" class="w-6 h-6 text-blue-600"></i>
+                            <h3 class="font-semibold text-gray-800">Grupos vs Flexibilidad</h3>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="text-center p-4 bg-blue-50 rounded-lg">
+                                <div class="text-2xl font-bold text-blue-600 mb-1">5</div>
+                                <div class="text-sm text-gray-600">PMBOK 6</div>
+                            </div>
+                            <div class="text-center p-4 bg-emerald-50 rounded-lg">
+                                <div class="text-2xl font-bold text-emerald-600 mb-1">∞</div>
+                                <div class="text-sm text-gray-600">PMBOK 7</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-lg">
+                        <div class="flex items-center space-x-3 mb-4">
+                            <i data-lucide="clock" class="w-6 h-6 text-blue-600"></i>
+                            <h3 class="font-semibold text-gray-800">Año de Publicación</h3>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="text-center p-4 bg-blue-50 rounded-lg">
+                                <div class="text-2xl font-bold text-blue-600 mb-1">2017</div>
+                                <div class="text-sm text-gray-600">PMBOK 6</div>
+                            </div>
+                            <div class="text-center p-4 bg-emerald-50 rounded-lg">
+                                <div class="text-2xl font-bold text-emerald-600 mb-1">2021</div>
+                                <div class="text-sm text-gray-600">PMBOK 7</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="gradient-bg text-white rounded-2xl p-8">
+                <h2 class="text-2xl font-bold mb-6 text-center">Impacto en la Industria</h2>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="text-center">
+                        <div class="text-4xl font-bold mb-2">6M+</div>
+                        <div class="text-blue-100">Profesionales Certificados PMP</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl font-bold mb-2">214</div>
+                        <div class="text-blue-100">Países con Presencia PMI</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl font-bold mb-2">75%</div>
+                        <div class="text-blue-100">Mejora en Éxito de Proyectos</div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- PMBOK 6 Section -->
+        <div id="content-pmbok6" class="space-y-12 hidden">
+            <section class="text-center">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6">PMBOK 6: Enfoque Basado en Procesos</h2>
+                <div class="bg-white rounded-2xl shadow-xl p-8 max-w-4xl mx-auto">
+                    <p class="text-lg text-gray-600 leading-relaxed mb-6">
+                        PMBOK 6 se caracteriza por su enfoque estructurado y sistemático, organizando 
+                        la gestión de proyectos en <strong>49 procesos</strong> distribuidos en 
+                        <strong>10 áreas de conocimiento</strong> y <strong>5 grupos de procesos</strong>.
+                    </p>
+                    <div class="grid md:grid-cols-2 gap-6 mt-8">
+                        <div class="p-6 bg-blue-50 rounded-xl">
+                            <h3 class="font-semibold text-gray-800 mb-3">Ventajas</h3>
+                            <ul class="text-sm text-gray-600 space-y-2">
+                                <li class="flex items-start">
+                                    <i data-lucide="check-circle" class="w-4 h-4 text-green-600 mr-2 mt-0.5"></i>
+                                    Estructura clara y bien definida
+                                </li>
+                                <li class="flex items-start">
+                                    <i data-lucide="check-circle" class="w-4 h-4 text-green-600 mr-2 mt-0.5"></i>
+                                    Procesos detallados y específicos
+                                </li>
+                                <li class="flex items-start">
+                                    <i data-lucide="check-circle" class="w-4 h-4 text-green-600 mr-2 mt-0.5"></i>
+                                    Ideal para proyectos tradicionales
+                                </li>
+                                <li class="flex items-start">
+                                    <i data-lucide="check-circle" class="w-4 h-4 text-green-600 mr-2 mt-0.5"></i>
+                                    Documentación exhaustiva
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="p-6 bg-red-50 rounded-xl">
+                            <h3 class="font-semibold text-gray-800 mb-3">Limitaciones</h3>
+                            <ul class="text-sm text-gray-600 space-y-2">
+                                <li class="flex items-start">
+                                    <i data-lucide="arrow-right" class="w-4 h-4 text-red-600 mr-2 mt-0.5"></i>
+                                    Puede ser rígido para proyectos ágiles
+                                </li>
+                                <li class="flex items-start">
+                                    <i data-lucide="arrow-right" class="w-4 h-4 text-red-600 mr-2 mt-0.5"></i>
+                                    Complejidad en proyectos pequeños
+                                </li>
+                                <li class="flex items-start">
+                                    <i data-lucide="arrow-right" class="w-4 h-4 text-red-600 mr-2 mt-0.5"></i>
+                                    Enfoque prescriptivo
+                                </li>
+                                <li class="flex items-start">
+                                    <i data-lucide="arrow-right" class="w-4 h-4 text-red-600 mr-2 mt-0.5"></i>
+                                    Menor adaptabilidad al contexto
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="text-2xl font-bold text-gray-800 mb-8 text-center">Áreas de Conocimiento Principales</h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-blue-500 card-hover">
+                        <div class="flex items-start space-x-4">
+                            <i data-lucide="layers" class="w-8 h-8 text-blue-600 mt-1"></i>
+                            <div>
+                                <h3 class="font-semibold text-lg text-gray-800 mb-2">Integración del Proyecto</h3>
+                                <p class="text-gray-600 text-sm leading-relaxed">Gestiona la coordinación de todos los aspectos del proyecto, incluyendo el desarrollo del acta de constitución, plan de gestión y control integrado de cambios.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-purple-500 card-hover">
+                        <div class="flex items-start space-x-4">
+                            <i data-lucide="target" class="w-8 h-8 text-blue-600 mt-1"></i>
+                            <div>
+                                <h3 class="font-semibold text-lg text-gray-800 mb-2">Gestión del Alcance</h3>
+                                <p class="text-gray-600 text-sm leading-relaxed">Define y controla qué trabajo está incluido en el proyecto. Incluye la recopilación de requisitos, definición del alcance y creación de la EDT.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-green-500 card-hover">
+                        <div class="flex items-start space-x-4">
+                            <i data-lucide="clock" class="w-8 h-8 text-blue-600 mt-1"></i>
+                            <div>
+                                <h3 class="font-semibold text-lg text-gray-800 mb-2">Gestión del Cronograma</h3>
+                                <p class="text-gray-600 text-sm leading-relaxed">Planifica, desarrolla y controla el cronograma del proyecto. Incluye la definición de actividades, secuenciación y estimación de duraciones.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-yellow-500 card-hover">
+                        <div class="flex items-start space-x-4">
+                            <i data-lucide="trending-up" class="w-8 h-8 text-blue-600 mt-1"></i>
+                            <div>
+                                <h3 class="font-semibold text-lg text-gray-800 mb-2">Gestión de Costos</h3>
+                                <p class="text-gray-600 text-sm leading-relaxed">Planifica, estima, presupuesta y controla los costos del proyecto para que se complete dentro del presupuesto aprobado.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-red-500 card-hover">
+                        <div class="flex items-start space-x-4">
+                            <i data-lucide="shield" class="w-8 h-8 text-blue-600 mt-1"></i>
+                            <div>
+                                <h3 class="font-semibold text-lg text-gray-800 mb-2">Gestión de Calidad</h3>
+                                <p class="text-gray-600 text-sm leading-relaxed">Incorpora la política de calidad de la organización en cuanto a planificación, gestión y control de los requisitos de calidad.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-indigo-500 card-hover">
+                        <div class="flex items-start space-x-4">
+                            <i data-lucide="users" class="w-8 h-8 text-blue-600 mt-1"></i>
+                            <div>
+                                <h3 class="font-semibold text-lg text-gray-800 mb-2">Gestión de Recursos</h3>
+                                <p class="text-gray-600 text-sm leading-relaxed">Identifica, adquiere y gestiona los recursos necesarios para completar exitosamente el proyecto.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="bg-white rounded-2xl shadow-xl p-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">Los 5 Grupos de Procesos</h2>
+                <div class="grid md:grid-cols-5 gap-4">
+                    <div class="p-4 rounded-xl text-center bg-green-100 text-green-800">
+                        <i data-lucide="play-circle" class="w-8 h-8 mx-auto mb-2"></i>
+                        <div class="font-semibold text-sm">Inicio</div>
+                    </div>
+                    <div class="p-4 rounded-xl text-center bg-blue-100 text-blue-800">
+                        <i data-lucide="file-text" class="w-8 h-8 mx-auto mb-2"></i>
+                        <div class="font-semibold text-sm">Planificación</div>
+                    </div>
+                    <div class="p-4 rounded-xl text-center bg-yellow-100 text-yellow-800">
+                        <i data-lucide="cog" class="w-8 h-8 mx-auto mb-2"></i>
+                        <div class="font-semibold text-sm">Ejecución</div>
+                    </div>
+                    <div class="p-4 rounded-xl text-center bg-purple-100 text-purple-800">
+                        <i data-lucide="trending-up" class="w-8 h-8 mx-auto mb-2"></i>
+                        <div class="font-semibold text-sm">Monitoreo</div>
+                    </div>
+                    <div class="p-4 rounded-xl text-center bg-red-100 text-red-800">
+                        <i data-lucide="check-circle" class="w-8 h-8 mx-auto mb-2"></i>
+                        <div class="font-semibold text-sm">Cierre</div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- PMBOK 7 Section -->
+        <div id="content-pmbok7" class="space-y-12 hidden">
+            <section class="text-center">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6">PMBOK 7: Enfoque Basado en Principios</h2>
+                <div class="bg-white rounded-2xl shadow-xl p-8 max-w-4xl mx-auto">
+                    <p class="text-lg text-gray-600 leading-relaxed mb-6">
+                        PMBOK 7 representa una evolución hacia un enfoque más flexible y adaptativo, 
+                        basado en <strong>12 principios fundamentales</strong> y <strong>8 dominios de rendimiento</strong> 
+                        que permiten adaptar la gestión de proyectos a cualquier contexto.
+                    </p>
+                    <div class="grid md:grid-cols-2 gap-6 mt-8">
+                        <div class="p-6 bg-emerald-50 rounded-xl">
+                            <h3 class="font-semibold text-gray-800 mb-3">Innovaciones</h3>
+                            <ul class="text-sm text-gray-600 space-y-2">
+                                <li class="flex items-start">
+                                    <i data-lucide="zap" class="w-4 h-4 text-emerald-600 mr-2 mt-0.5"></i>
+                                    Enfoque adaptativo y flexible
+                                </li>
+                                <li class="flex items-start">
+                                    <i data-lucide="zap" class="w-4 h-4 text-emerald-600 mr-2 mt-0.5"></i>
+                                    Compatibilidad con metodologías ágiles
+                                </li>
+                                <li class="flex items-start">
+                                    <i data-lucide="zap" class="w-4 h-4 text-emerald-600 mr-2 mt-0.5"></i>
+                                    Énfasis en creación de valor
+                                </li>
+                                <li class="flex items-start">
+                                    <i data-lucide="zap" class="w-4 h-4 text-emerald-600 mr-2 mt-0.5"></i>
+                                    Principios universales
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="p-6 bg-blue-50 rounded-xl">
+                            <h3 class="font-semibold text-gray-800 mb-3">Beneficios</h3>
+                            <ul class="text-sm text-gray-600 space-y-2">
+                                <li class="flex items-start">
+                                    <i data-lucide="target" class="w-4 h-4 text-blue-600 mr-2 mt-0.5"></i>
+                                    Mayor adaptabilidad contextual
+                                </li>
+                                <li class="flex items-start">
+                                    <i data-lucide="target" class="w-4 h-4 text-blue-600 mr-2 mt-0.5"></i>
+                                    Integración con marcos ágiles
+                                </li>
+                                <li class="flex items-start">
+                                    <i data-lucide="target" class="w-4 h-4 text-blue-600 mr-2 mt-0.5"></i>
+                                    Enfoque en resultados de valor
+                                </li>
+                                <li class="flex items-start">
+                                    <i data-lucide="target" class="w-4 h-4 text-blue-600 mr-2 mt-0.5"></i>
+                                    Simplicidad operativa
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="text-2xl font-bold text-gray-800 mb-8 text-center">Los 12 Principios Fundamentales</h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-emerald-500 card-hover">
+                        <div class="flex items-start space-x-4">
+                            <i data-lucide="shield" class="w-8 h-8 text-emerald-600 mt-1"></i>
+                            <div>
+                                <h3 class="font-semibold text-lg text-gray-800 mb-2">Administrador Diligente</h3>
+                                <p class="text-gray-600 text-sm leading-relaxed">Los directores de proyecto ejercen la administración diligente a través de la integridad, cuidado y confiabilidad.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-blue-500 card-hover">
+                        <div class="flex items-start space-x-4">
+                            <i data-lucide="users" class="w-8 h-8 text-emerald-600 mt-1"></i>
+                            <div>
+                                <h3 class="font-semibold text-lg text-gray-800 mb-2">Crear un Entorno Colaborativo</h3>
+                                <p class="text-gray-600 text-sm leading-relaxed">Los equipos de proyecto crean un entorno colaborativo que fomenta la alineación, propiedad y alto rendimiento.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-purple-500 card-hover">
+                        <div class="flex items-start space-x-4">
+                            <i data-lucide="git-branch" class="w-8 h-8 text-emerald-600 mt-1"></i>
+                            <div>
+                                <h3 class="font-semibold text-lg text-gray-800 mb-2">Involucrar Efectivamente a los Stakeholders</h3>
+                                <p class="text-gray-600 text-sm leading-relaxed">Los directores de proyecto involucran efectivamente a los stakeholders para facilitar la participación y el apoyo.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-green-500 card-hover">
+                        <div class="flex items-start space-x-4">
+                            <i data-lucide="target" class="w-8 h-8 text-emerald-600 mt-1"></i>
+                            <div>
+                                <h3 class="font-semibold text-lg text-gray-800 mb-2">Enfocarse en el Valor</h3>
+                                <p class="text-gray-600 text-sm leading-relaxed">Los directores de proyecto se enfocan continuamente en el valor para producir los mejores resultados de negocio.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-yellow-500 card-hover">
+                        <div class="flex items-start space-x-4">
+                            <i data-lucide="cog" class="w-8 h-8 text-emerald-600 mt-1"></i>
+                            <div>
+                                <h3 class="font-semibold text-lg text-gray-800 mb-2">Pensamiento Sistémico</h3>
+                                <p class="text-gray-600 text-sm leading-relaxed">Los directores de proyecto aplican el pensamiento sistémico para optimizar el rendimiento del proyecto.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-red-500 card-hover">
+                        <div class="flex items-start space-x-4">
+                            <i data-lucide="lightbulb" class="w-8 h-8 text-emerald-600 mt-1"></i>
+                            <div>
+                                <h3 class="font-semibold text-lg text-gray-800 mb-2">Demostrar Comportamientos de Liderazgo</h3>
+                                <p class="text-gray-600 text-sm leading-relaxed">Los directores de proyecto demuestran y adaptan comportamientos de liderazgo para apoyar las necesidades del proyecto.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="bg-white rounded-2xl shadow-xl p-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">Los 8 Dominios de Rendimiento</h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="p-4 bg-gradient-to-br from-emerald-50 to-blue-50 rounded-xl text-center">
+                        <i data-lucide="users" class="w-8 h-8 mx-auto mb-2 text-emerald-600"></i>
+                        <div class="font-semibold text-sm text-gray-800 mb-1">Stakeholders</div>
+                        <div class="text-xs text-gray-600">Involucramiento efectivo</div>
+                    </div>
+                    <div class="p-4 bg-gradient-to-br from-emerald-50 to-blue-50 rounded-xl text-center">
+                        <i data-lucide="git-branch" class="w-8 h-8 mx-auto mb-2 text-emerald-600"></i>
+                        <div class="font-semibold text-sm text-gray-800 mb-1">Equipo</div>
+                        <div class="text-xs text-gray-600">Cultura colaborativa</div>
+                    </div>
+                    <div class="p-4 bg-gradient-to-br from-emerald-50 to-blue-50 rounded-xl text-center">
+                        <i data-lucide="cog" class="w-8 h-8 mx-auto mb-2 text-emerald-600"></i>
+                        <div class="font-semibold text-sm text-gray-800 mb-1">Enfoque de Desarrollo</div>
+                        <div class="text-xs text-gray-600">Métodos y ciclos de vida</div>
+                    </div>
+                    <div class="p-4 bg-gradient-to-br from-emerald-50 to-blue-50 rounded-xl text-center">
+                        <i data-lucide="file-text" class="w-8 h-8 mx-auto mb-2 text-emerald-600"></i>
+                        <div class="font-semibold text-sm text-gray-800 mb-1">Planificación</div>
+                        <div class="text-xs text-gray-600">Organización y coordinación</div>
+                    </div>
+                    <div class="p-4 bg-gradient-to-br from-emerald-50 to-blue-50 rounded-xl text-center">
+                        <i data-lucide="target" class="w-8 h-8 mx-auto mb-2 text-emerald-600"></i>
+                        <div class="font-semibold text-sm text-gray-800 mb-1">Trabajo del Proyecto</div>
+                        <div class="text-xs text-gray-600">Ejecución efectiva</div>
+                    </div>
+                    <div class="p-4 bg-gradient-to-br from-emerald-50 to-blue-50 rounded-xl text-center">
+                        <i data-lucide="check-circle" class="w-8 h-8 mx-auto mb-2 text-emerald-600"></i>
+                        <div class="font-semibold text-sm text-gray-800 mb-1">Entrega</div>
+                        <div class="text-xs text-gray-600">Valor y beneficios</div>
+                    </div>
+                    <div class="p-4 bg-gradient-to-br from-emerald-50 to-blue-50 rounded-xl text-center">
+                        <i data-lucide="trending-up" class="w-8 h-8 mx-auto mb-2 text-emerald-600"></i>
+                        <div class="font-semibold text-sm text-gray-800 mb-1">Medición</div>
+                        <div class="text-xs text-gray-600">Rendimiento y progreso</div>
+                    </div>
+                    <div class="p-4 bg-gradient-to-br from-emerald-50 to-blue-50 rounded-xl text-center">
+                        <i data-lucide="shield" class="w-8 h-8 mx-auto mb-2 text-emerald-600"></i>
+                        <div class="font-semibold text-sm text-gray-800 mb-1">Incertidumbre</div>
+                        <div class="text-xs text-gray-600">Riesgos y oportunidades</div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Comparison Section -->
+        <div id="content-comparison" class="space-y-12 hidden">
+            <section class="text-center">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6">Análisis Comparativo Detallado</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                    Comprende las diferencias clave entre ambas versiones para tomar decisiones informadas 
+                    sobre cuál implementar en tu organización.
+                </p>
+            </section>
+
+            <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead class="gradient-bg text-white">
+                            <tr>
+                                <th class="px-6 py-4 text-left font-semibold">Aspecto</th>
+                                <th class="px-6 py-4 text-center font-semibold">PMBOK 6</th>
+                                <th class="px-6 py-4 text-center font-semibold">PMBOK 7</th>
+                                <th class="px-6 py-4 text-left font-semibold">Impacto</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200">
+                            <tr class="hover:bg-gray-50 transition-colors">
+                                <td class="px-6 py-4 font-medium text-gray-800">Enfoque Principal</td>
+                                <td class="px-6 py-4 text-center">
+                                    <span class="inline-block px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">
+                                        Procesos y Áreas de Conocimiento
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 text-center">
+                                    <span class="inline-block px-3 py-1 bg-emerald-100 text-emerald-800 rounded-full text-sm">
+                                        Principios y Dominios de Rendimiento
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 text-sm text-gray-600">PMBOK 6 se centra en 49 procesos organizados en 10 áreas de conocimiento, mientras que PMBOK 7 se basa en 12 principios fundamentales.</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 transition-colors">
+                                <td class="px-6 py-4 font-medium text-gray-800">Estructura</td>
+                                <td class="px-6 py-4 text-center">
+                                    <span class="inline-block px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">
+                                        5 Grupos de Procesos
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 text-center">
+                                    <span class="inline-block px-3 py-1 bg-emerald-100 text-emerald-800 rounded-full text-sm">
+                                        8 Dominios de Rendimiento
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 text-sm text-gray-600">PMBOK 6 organiza los procesos en Inicio, Planificación, Ejecución, Monitoreo y Control, y Cierre. PMBOK 7 se estructura en dominios interrelacionados.</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 transition-colors">
+                                <td class="px-6 py-4 font-medium text-gray-800">Flexibilidad</td>
+                                <td class="px-6 py-4 text-center">
+                                    <span class="inline-block px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">
+                                        Enfoque Predictivo
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 text-center">
+                                    <span class="inline-block px-3 py-1 bg-emerald-100 text-emerald-800 rounded-full text-sm">
+                                        Enfoque Adaptativo
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 text-sm text-gray-600">PMBOK 6 favorece un enfoque secuencial y predictivo, mientras que PMBOK 7 embraca la adaptabilidad y flexibilidad.</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 transition-colors">
+                                <td class="px-6 py-4 font-medium text-gray-800">Metodologías</td>
+                                <td class="px-6 py-4 text-center">
+                                    <span class="inline-block px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">
+                                        Principalmente Waterfall
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 text-center">
+                                    <span class="inline-block px-3 py-1 bg-emerald-100 text-emerald-800 rounded-full text-sm">
+                                        Ágil, Híbrido y Tradicional
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 text-sm text-gray-600">PMBOK 7 reconoce explícitamente diferentes enfoques metodológicos incluyendo ágiles e híbridos.</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 transition-colors">
+                                <td class="px-6 py-4 font-medium text-gray-800">Valor</td>
+                                <td class="px-6 py-4 text-center">
+                                    <span class="inline-block px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">
+                                        Cumplimiento de Requisitos
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 text-center">
+                                    <span class="inline-block px-3 py-1 bg-emerald-100 text-emerald-800 rounded-full text-sm">
+                                        Creación de Valor
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 text-sm text-gray-600">PMBOK 7 pone mayor énfasis en la creación de valor para los stakeholders más que solo cumplir requisitos.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <section class="grid md:grid-cols-2 gap-8">
+                <div class="bg-blue-50 rounded-2xl p-8">
+                    <h3 class="text-2xl font-bold text-blue-800 mb-6">Cuándo Usar PMBOK 6</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start space-x-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-blue-600 mt-1"></i>
+                            <div>
+                                <div class="font-semibold text-gray-800">Proyectos Tradicionales</div>
+                                <div class="text-sm text-gray-600">Construcción, manufactura, infraestructura</div>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-blue-600 mt-1"></i>
+                            <div>
+                                <div class="font-semibold text-gray-800">Organizaciones Reguladas</div>
+                                <div class="text-sm text-gray-600">Sectores con alta regulación y compliance</div>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-blue-600 mt-1"></i>
+                            <div>
+                                <div class="font-semibold text-gray-800">Equipos Nuevos</div>
+                                <div class="text-sm text-gray-600">Cuando se necesita estructura y guía detallada</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-emerald-50 rounded-2xl p-8">
+                    <h3 class="text-2xl font-bold text-emerald-800 mb-6">Cuándo Usar PMBOK 7</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start space-x-3">
+                            <i data-lucide="zap" class="w-5 h-5 text-emerald-600 mt-1"></i>
+                            <div>
+                                <div class="font-semibold text-gray-800">Proyectos Ágiles</div>
+                                <div class="text-sm text-gray-600">Desarrollo de software, startups, innovación</div>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <i data-lucide="zap" class="w-5 h-5 text-emerald-600 mt-1"></i>
+                            <div>
+                                <div class="font-semibold text-gray-800">Entornos Cambiantes</div>
+                                <div class="text-sm text-gray-600">Mercados dinámicos con alta incertidumbre</div>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <i data-lucide="zap" class="w-5 h-5 text-emerald-600 mt-1"></i>
+                            <div>
+                                <div class="font-semibold text-gray-800">Equipos Experimentados</div>
+                                <div class="text-sm text-gray-600">Profesionales que valoran la flexibilidad</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Evolution Section -->
+        <div id="content-evolution" class="space-y-12 hidden">
+            <section class="text-center">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6">Evolución y Tendencias Futuras</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                    Descubre cómo ha evolucionado la gestión de proyectos y hacia dónde se dirige la disciplina.
+                </p>
+            </section>
+
+            <div class="bg-white rounded-2xl shadow-xl p-8">
+                <h3 class="text-2xl font-bold text-gray-800 mb-8 text-center">Línea de Tiempo de la Evolución</h3>
+                <div class="relative">
+                    <div class="timeline-line"></div>
+                    <div class="space-y-12">
+                        <div class="flex items-center">
+                            <div class="w-1/2 pr-8 text-right">
+                                <div class="bg-gradient-to-r from-blue-50 to-emerald-50 p-6 rounded-xl">
+                                    <div class="font-bold text-xl text-gray-800 mb-2">2017</div>
+                                    <div class="font-semibold text-lg text-gray-700 mb-2">Lanzamiento de PMBOK 6</div>
+                                    <div class="text-gray-600">Introdujo la gestión de recursos y actualizó procesos</div>
+                                </div>
+                            </div>
+                            <div class="timeline-dot"></div>
+                            <div class="w-1/2"></div>
+                        </div>
+                        <div class="flex items-center flex-row-reverse">
+                            <div class="w-1/2 pl-8 text-left">
+                                <div class="bg-gradient-to-r from-blue-50 to-emerald-50 p-6 rounded-xl">
+                                    <div class="font-bold text-xl text-gray-800 mb-2">2019</div>
+                                    <div class="font-semibold text-lg text-gray-700 mb-2">Desarrollo de PMBOK 7</div>
+                                    <div class="text-gray-600">Inicio del desarrollo basado en feedback de la comunidad</div>
+                                </div>
+                            </div>
+                            <div class="timeline-dot"></div>
+                            <div class="w-1/2"></div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-1/2 pr-8 text-right">
+                                <div class="bg-gradient-to-r from-blue-50 to-emerald-50 p-6 rounded-xl">
+                                    <div class="font-bold text-xl text-gray-800 mb-2">2021</div>
+                                    <div class="font-semibold text-lg text-gray-700 mb-2">Publicación de PMBOK 7</div>
+                                    <div class="text-gray-600">Cambio revolucionario hacia principios y dominios</div>
+                                </div>
+                            </div>
+                            <div class="timeline-dot"></div>
+                            <div class="w-1/2"></div>
+                        </div>
+                        <div class="flex items-center flex-row-reverse">
+                            <div class="w-1/2 pl-8 text-left">
+                                <div class="bg-gradient-to-r from-blue-50 to-emerald-50 p-6 rounded-xl">
+                                    <div class="font-bold text-xl text-gray-800 mb-2">2023</div>
+                                    <div class="font-semibold text-lg text-gray-700 mb-2">Adopción Generalizada</div>
+                                    <div class="text-gray-600">Organizaciones adaptan el nuevo enfoque basado en principios</div>
+                                </div>
+                            </div>
+                            <div class="timeline-dot"></div>
+                            <div class="w-1/2"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <section class="grid md:grid-cols-3 gap-8">
+                <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-8">
+                    <div class="text-center">
+                        <i data-lucide="lightbulb" class="w-12 h-12 text-blue-600 mx-auto mb-4"></i>
+                        <h3 class="text-xl font-bold text-gray-800 mb-4">Tendencias Futuras</h3>
+                        <ul class="text-sm text-gray-600 space-y-2 text-left">
+                            <li>• Inteligencia Artificial en PM</li>
+                            <li>• Automatización de procesos</li>
+                            <li>• Gestión de proyectos remotos</li>
+                            <li>• Sostenibilidad en proyectos</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-emerald-50 to-emerald-100 rounded-2xl p-8">
+                    <div class="text-center">
+                        <i data-lucide="trending-up" class="w-12 h-12 text-emerald-600 mx-auto mb-4"></i>
+                        <h3 class="text-xl font-bold text-gray-800 mb-4">Mercado Actual</h3>
+                        <ul class="text-sm text-gray-600 space-y-2 text-left">
+                            <li>• 87% adopción de metodologías ágiles</li>
+                            <li>• 73% reporta mejores resultados</li>
+                            <li>• 65% combina enfoques híbridos</li>
+                            <li>• 52% invierte en capacitación</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-2xl p-8">
+                    <div class="text-center">
+                        <i data-lucide="target" class="w-12 h-12 text-purple-600 mx-auto mb-4"></i>
+                        <h3 class="text-xl font-bold text-gray-800 mb-4">Recomendaciones</h3>
+                        <ul class="text-sm text-gray-600 space-y-2 text-left">
+                            <li>• Evaluar contexto organizacional</li>
+                            <li>• Capacitar equipos gradualmente</li>
+                            <li>• Implementar cambios piloto</li>
+                            <li>• Medir resultados continuamente</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h3 class="text-2xl font-bold mb-4">Transforma tu Gestión de Proyectos</h3>
+                <p class="text-gray-300 mb-8 max-w-2xl mx-auto">
+                    La evolución de PMBOK refleja la madurez de la disciplina. Elige el enfoque que mejor 
+                    se adapte a tu contexto y continúa desarrollando tus habilidades profesionales.
+                </p>
+                <div class="flex justify-center space-x-6">
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-blue-400">Professional</div>
+                        <div class="text-gray-300">Certification</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-emerald-400">Continuous</div>
+                        <div class="text-gray-300">Learning</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-purple-400">Strategic</div>
+                        <div class="text-gray-300">Excellence</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Tab functionality
+        function showTab(tabName) {
+            // Hide all content sections
+            const contents = ['overview', 'pmbok6', 'pmbok7', 'comparison', 'evolution'];
+            contents.forEach(content => {
+                document.getElementById(`content-${content}`).classList.add('hidden');
+                document.getElementById(`tab-${content}`).className = 
+                    'flex items-center space-x-2 py-4 px-6 border-b-2 font-medium text-sm transition-colors tab-inactive';
+            });
+
+            // Show selected content and activate tab
+            document.getElementById(`content-${tabName}`).classList.remove('hidden');
+            document.getElementById(`tab-${tabName}`).className = 
+                'flex items-center space-x-2 py-4 px-6 border-b-2 font-medium text-sm transition-colors tab-active';
+        }
+
+        // Initialize with overview tab
+        showTab('overview');
+    </script>
+</body>
+</html>
